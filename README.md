@@ -1,4 +1,4 @@
-## Forked from Awesome CV
+## Forked from [Awesome CV](https://github.com/posquit0/Awesome-CV)
 
 ## <a name="what-is-awesomecv"></a>What is Awesome CV?
 
