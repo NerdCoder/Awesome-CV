@@ -179,6 +179,15 @@
   BoldItalicFont=*-MediumItalic,
 ]{Roboto}
 
+% Set font for development stack (default is Consolas)
+\newfontfamily\stackfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  ItalicFont=*-Italic,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+]{Consolas}
+
 \newcommand*{\footerfont}{\sourcesanspro}
 \newcommand*{\bodyfont}{\sourcesanspro}
 \newcommand*{\bodyfontlight}{\sourcesansprolight}
@@ -206,6 +215,17 @@
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
+
+% For elements of reference
+\newcommand*{\refnamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\refpositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\refphonestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\refemailstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\refdeptstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\refunivstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\reflocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+
+
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
 \newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
@@ -219,9 +239,19 @@
 \newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 
+% For elements of project
+\newcommand*{\projectdetailsstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\projecttitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\projectdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\projectstackstyle}[1]{{\fontsize{7pt}{1em}\stackfont\color{darktext} #1}}
+
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{8pt}{1em}\stackfont\color{text} #1}}
+
+% For elements of personal
+\newcommand*{\personalnamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\personaldatastyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
@@ -432,7 +462,7 @@
     \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
     \\[\acvHeaderAfterNameSkip]%
     \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-    \ifthenelse{\isundefined{\@address}}{}{\faHome\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
+    \ifthenelse{\isundefined{\@address}}{}{{\faMapMarker} \headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
     \headersocialstyle{%
       \newbool{isstart}%
       \setbool{isstart}{true}%
@@ -609,7 +639,8 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
+    %-----------------------------------default-----------1.5cm-----------------4.0cm----2.5cm--------
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 5.0cm} R{3.5cm}}
 }{%
     \end{tabular*}
   \end{center}
@@ -702,3 +733,73 @@
       \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
     }
 }
+
+%-------------------------------------------------%
+%                     iqHpi                       %
+%-------------------------------------------------%
+
+% Define an environment for cvprojects
+\newenvironment{cvprojects}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    %-----------------------------------default-----------1.5cm-----------------4.0cm----2.5cm--------
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 5.0cm} R{3.5cm}}
+
+}{%
+    \end{tabular*}
+  \end{center}
+}
+% Define a line of cv information(projects)
+% Usage: \cvproject{<title>}{<details>}{<stack>}{<date>}
+\newcommand*{\cvproject}[4]{%
+  \projectdatestyle{#4} & \projecttitlestyle{#1}, \projectdetailsstyle{#2} & \projectstackstyle{#3} \\
+}
+%------------------------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------------------------
+% Define an environment for cvpersonal
+\newenvironment{cvpersonals}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2.0mm}
+  \begin{center}
+    \setlength\tabcolsep{1ex}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+}{%
+    \end{tabular*}
+  \end{center}
+}
+% Define a line of cv information(personal)
+% Usage: \cvpersonal{<type>}{<personalset>}
+\newcommand*{\cvpersonal}[2]{%
+  \personalnamestyle{#1} & \personaldatastyle{#2} \\
+}
+%------------------------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------------------------
+% Define an environment for cvreference
+\newenvironment{cvreferences}{%
+  \vspace{\acvSectionContentTopSkip}
+  \begin{center}
+}{%
+  \end{center}
+}
+% Define an reference of cv information
+% Usage: \cvreference{<position>}{<name>}{<email>}{<phone>}{<dept>}{<univ>}{<location>}
+\newcommand*{\cvreference}[7]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \ifempty{#2#3}
+      {\refpositionstyle{#1} & \refemailstyle{#4} \\}
+      {\refnamestyle{#2} & \href{mailto:#3}{ \headersocialstyle{\faEnvelope} \refemailstyle{#3}} \\
+      \refpositionstyle{#1} & \headersocialstyle{\faMobile} \refphonestyle{#4} \\
+      \refdeptstyle{#5}\\
+      \refunivstyle{#6}, \reflocationstyle{#7} \\\\
+      }
+  \end{tabular*}%
+}
+
+%\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}
