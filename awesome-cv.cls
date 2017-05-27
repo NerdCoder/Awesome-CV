@@ -188,9 +188,31 @@
   BoldItalicFont=*-BoldItalic,
 ]{Consolas}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+% Set font for header (Ubuntu)
+\newfontfamily\ubuntu[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  ItalicFont=*-Italic,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+]{Ubuntu}
+
+\newfontfamily\ubuntulight[
+  Path=\@fontdir,
+  UprightFont=*-Light,
+  ItalicFont=*-LightItalic,
+  BoldFont=*-Medium,
+  BoldItalicFont=*-MediumItalic,
+]{Ubuntu}
+
+%\newcommand*{\footerfont}{\sourcesanspro}
+%\newcommand*{\bodyfont}{\sourcesanspro}
+%\newcommand*{\bodyfontlight}{\sourcesansprolight}
+
+\newcommand*{\footerfont}{\ubuntu}
+\newcommand*{\bodyfont}{\ubuntu}
+\newcommand*{\bodyfontlight}{\ubuntulight}
+
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -251,7 +273,7 @@
 
 % For elements of personal
 \newcommand*{\personalnamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
-\newcommand*{\personaldatastyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\personaldatastyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
@@ -640,7 +662,7 @@
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
     %-----------------------------------default-----------1.5cm-----------------4.0cm----2.5cm--------
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 5.0cm} R{3.5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.7cm} L{\textwidth - 5.0cm} R{3.3cm}}
 }{%
     \end{tabular*}
   \end{center}
